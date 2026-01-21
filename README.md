@@ -1,26 +1,25 @@
 # Barcode Grouper
 
-A modern desktop application built with **Electron** and **React** to organize product images by grouping them into folders based on their barcode identifier.
+A simple app to organize your product images into folders using their barcodes.
 
 ![App Screenshot](https://via.placeholder.com/800x600?text=App+Screenshot+Placeholder)
 
 ## Features
--   **Excel Mapping**: Reads a mapping file (Col A: Barcode, Col B: Filename Prefix).
--   **Bulk Organization**: Scans a source folder and moves images into barcode-named subfolders.
--   **Destination Control**: Optionally specify a separate destination folder.
--   **Privacy Focused**: Runs entirely offline (Local File System). No cloud uploads.
--   **Dark Mode UI**: Sleek, modern interface using TailwindCSS.
+-   **Excel Mapping**: Uses your Excel file to match images. (Col A: Barcode, Col B: Product Image Name)
+-   **Automatic Sorting**: Just pick a folder, and it sorts everything for you.
+-   **Safe & Private**: Runs 100% on your computer. Nothing is sent to the internet.
+-   **Destination Control**: Optionally choose where the sorted folders go.
+-   **Dark Mode**: A nice, easy-to-read dark theme.
 
-## Installation
+## How to Install (Easy Version)
 
-### Portable (Windows)
-1.  Download `BarcodeGrouper_Release_v1.0.1.zip` from Releases.
-2.  Extract the folder.
-3.  Run `Barcode Grouper.exe`.
+1.  **Download**: Go to the **Releases** section (on the right side of this page) and click to download `BarcodeGrouper_Release_v1.0.1.zip`.
+2.  **Unzip**: Locate the downloaded file in your Downloads folder. **Right-Click** on it and select **Extract All...**. Click **Extract** to finish.
+3.  **Run**: Opens the newly created folder and double-click the **Barcode Grouper** application (it might say `.exe` at the end).
 
-*Note: No installation required.*
+*That's it! The app will open immediately. No complex installation required.*
 
-## Development
+## Development (For Developers)
 
 ### Prerequisites
 -   Node.js (v18+)
@@ -46,11 +45,10 @@ npm run build
 Output will be in `dist/win-unpacked`.
 
 ## Tech Stack
--   **Electron** (Desktop Runtime)
--   **Vite** (Build Tool)
--   **React** (UI Framework)
--   **TailwindCSS** (Styling)
--   **XLSX** (SheetJS - Excel Processing)
+-   **Electron**
+-   **React**
+-   **TailwindCSS**
+-   **XLSX**
 
 ## License
 Proprietary - Majid Al Futtaim
