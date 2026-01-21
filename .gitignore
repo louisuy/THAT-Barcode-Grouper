@@ -32,3 +32,13 @@ logs/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webp
+*.heic
