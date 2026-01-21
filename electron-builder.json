@@ -1,0 +1,15 @@
+{
+    "appId": "com.thatbrcodegrouper.app",
+    "productName": "Barcode Grouper",
+    "directories": {
+        "output": "dist",
+        "buildResources": "build"
+    },
+    "files": [
+        "dist/**/*",
+        "dist-electron/**/*"
+    ],
+    "win": {
+        "target": "nsis"
+    }
+}
