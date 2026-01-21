@@ -1,7 +1,7 @@
 {
   "name": "barcode-grouper",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Desktop app to group images by barcode.",
   "author": "Majid Al Futtaim",
   "main": "dist-electron/main.js",
@@ -12,12 +12,14 @@
     "electron:dev": "concurrently \"npm run dev\" \"wait-on tcp:5173 && electron .\""
   },
   "dependencies": {
+    "clsx": "^2.1.0",
+    "electron-log": "^5.4.3",
+    "electron-updater": "^6.7.3",
+    "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "xlsx": "^0.18.5",
-    "lucide-react": "^0.344.0",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",

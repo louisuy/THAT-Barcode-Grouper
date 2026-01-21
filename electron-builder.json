@@ -9,8 +9,17 @@
         "dist/**/*",
         "dist-electron/**/*"
     ],
+    "publish": {
+        "provider": "github",
+        "owner": "louisuy",
+        "repo": "THAT-Barcode-Grouper"
+    },
     "win": {
-        "target": "dir",
+        "target": "nsis",
         "signAndEditExecutable": false
+    },
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true
     }
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Archive, FileSpreadsheet, FolderOpen, FolderOutput, Play, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
+import { Archive, FileSpreadsheet, FolderOpen, FolderOutput, Play, CheckCircle, AlertCircle, AlertTriangle, RefreshCw, ShieldCheck, Download } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -49,12 +49,16 @@ export default function App() {
         <div className="min-h-screen bg-slate-950 text-slate-200 p-8 font-sans selection:bg-purple-500/30">
             <div className="max-w-xl mx-auto space-y-8">
                 {/* Header */}
-                <div className="space-y-2 text-center">
-                    <div className="bg-gradient-to-tr from-purple-500 to-indigo-500 w-16 h-16 rounded-2xl mx-auto flex items-center justify-center shadow-2xl shadow-purple-500/20 mb-6">
+                <div className="flex flex-col items-center">
+                    <div className="w-full flex justify-between items-center mb-4">
+                        <UpdateChecker />
+                    </div>
+
+                    <div className="bg-gradient-to-tr from-purple-500 to-indigo-500 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/20 mb-4">
                         <Archive className="text-white w-8 h-8" />
                     </div>
                     <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Barcode Grouper</h1>
-                    <p className="text-slate-400">Organize your product images instantly.</p>
+                    <p className="text-slate-400 mt-2">Organize your product images instantly.</p>
                 </div>
 
                 {/* Main Card */}
@@ -167,8 +171,89 @@ export default function App() {
                     )}
                 </div>
 
-                <p className="text-center text-xs text-slate-600">Built with Electron & React</p>
+                {/* Footer */}
+                <div className="text-center pt-4">
+                    <p className="text-xs text-slate-700">Built with Electron & React • Proprietary MAF</p>
+                </div>
             </div>
+        </div>
+    );
+}
+
+function UpdateChecker() {
+    const [version, setVersion] = useState<string>('');
+    const [updateStatus, setUpdateStatus] = useState<{ text: string; type: string } | null>(null);
+    const [isChecking, setIsChecking] = useState(false);
+
+    useState(() => {
+        (window as any).api.getVersion().then(setVersion);
+        (window as any).api.onUpdateStatus((data: { text: string; type: string }) => {
+            setUpdateStatus(data);
+            setIsChecking(false);
+        });
+    });
+
+    const checkUpdates = () => {
+        setIsChecking(true);
+        (window as any).api.checkForUpdates();
+    };
+
+    const downloadUpdate = () => {
+        setUpdateStatus({ text: 'Starting download...', type: 'status' });
+        (window as any).api.downloadUpdate();
+    };
+
+    if (!version) return <div className="h-6 w-20 bg-slate-900 animate-pulse rounded" />;
+
+    return (
+        <div className="flex items-center gap-4 w-full">
+            <div className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-full text-[10px] font-medium text-slate-500">
+                <span className="text-slate-400 uppercase tracking-wider">v{version}</span>
+                <span className="w-1 h-1 bg-slate-700 rounded-full" />
+                <button
+                    onClick={checkUpdates}
+                    disabled={isChecking}
+                    className="flex items-center gap-1.5 hover:text-purple-400 transition-colors group"
+                >
+                    <RefreshCw className={cn("w-3 h-3", isChecking && "animate-spin text-purple-500")} />
+                    {isChecking ? "Checking..." : "Check"}
+                </button>
+            </div>
+
+            {updateStatus && updateStatus.type !== 'status' && (
+                <div className={cn(
+                    "flex items-center gap-3 px-3 py-1.5 rounded-xl border animate-in slide-in-from-right-4 transition-all duration-500",
+                    updateStatus.type === 'available' ? "bg-amber-500/10 border-amber-500/20 text-amber-400" : "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+                )}>
+                    {updateStatus.type === 'available' ? (
+                        <>
+                            <div className="flex items-center gap-2">
+                                <Download className="w-4 h-4 animate-bounce" />
+                                <span className="text-xs font-semibold">{updateStatus.text}</span>
+                            </div>
+                            <button
+                                onClick={downloadUpdate}
+                                className="bg-amber-500 hover:bg-amber-600 text-slate-950 text-[10px] px-2 py-0.5 rounded font-bold transition-colors"
+                            >
+                                GET
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex items-center gap-2">
+                                <ShieldCheck className="w-4 h-4" />
+                                <span className="text-xs font-semibold">Ready to install!</span>
+                            </div>
+                            <button
+                                onClick={() => (window as any).api.installUpdate()}
+                                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-[10px] px-2 py-0.5 rounded font-bold transition-colors"
+                            >
+                                RESTART
+                            </button>
+                        </>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
