@@ -2,7 +2,7 @@
 
 A simple app to organize your product images into folders using their barcodes.
 
-![App Screenshot](https://via.placeholder.com/800x600?text=App+Screenshot+Placeholder)
+![App Screenshot](./docs/screenshot.png)
 
 ## Features
 -   **Excel Mapping**: Uses your Excel file to match images. (Col A: Barcode, Col B: Product Image Name)
@@ -11,7 +11,7 @@ A simple app to organize your product images into folders using their barcodes.
 -   **Destination Control**: Optionally choose where the sorted folders go.
 -   **Dark Mode**: A nice, easy-to-read dark theme.
 
-## How to Install (Easy Version)
+## Installation
 
 1.  **Download**: Go to the **Releases** section (on the right side of this page) and click to download `BarcodeGrouper_Release_v1.0.1.zip`.
 2.  **Unzip**: Locate the downloaded file in your Downloads folder. **Right-Click** on it and select **Extract All...**. Click **Extract** to finish.
